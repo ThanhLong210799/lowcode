@@ -51,10 +51,39 @@
 
 	</tr>
 </table>
-<div>
+<div align="center">
 	<input type="button" value="検索" class="imui-medium-button"
 		id="btnSearch"> <input type="button" value="クリア"
 		class="imui-medium-button" id="btnClear">
+</div>
+
+<h2>
+	<imart type="string" value="Kết quả tìm kiếm" escapeJs="true"
+		escapeXml="true" />
+</h2>
+<div id="detailTable">
+	<imart type="imuiListTable" id="listTable" target="initListTable"
+		process="csjs" multiSelect="true" shrinkToFit="true"
+		viewRecords="true" onCellSelect="onCellSelect"> <pager
+		rowNum="10" rowList="10,20,50,100" /> <cols>
+	<col name="acceptance_report_id" caption="Mã biên bản" sortable="true"
+		id="acceptance_report_id" />
+	<col name="contract_no" caption="Mã hợp đồng" sortable="true"
+		id="contract_no" />
+	<col name="customer_name" caption="Tên khách hàng" sortable="true"
+		id="customer_name" />
+	<col name="project_name" caption="Tên dự án" sortable="true"
+		id="project_name" />
+	<col name="person_in_charge" caption="Người quản lý" sortable="true"
+		id="person_in_charge" />
+	<col name="contract_period" caption="Thời gian làm việc"
+		sortable="true" id="contract_period" />
+	<col name="contract_payment_date" caption="Ngày thành toán"
+		sortable="true" id="contract_payment_date" />
+	<col name="type_name" caption="Trạng thái" sortable="true"
+		id="type_name" />
+	<col name="contract_payment_id" hidden id="contract_payment_id" />
+	</cols> </imart>
 </div>
 
 
@@ -86,10 +115,39 @@
 		$("#actionForm").attr("action", "acceptance_report_list/searchAction");
 		imuiAjaxSend("#actionForm", "POST", "json", $.noop, function(data) {
 			var dataReceived = ImJson.parseJSON(data.responseText);
-			console.log(dataReceived)
+			$("#countRow").text(dataReceived.data.countRow);
+			$("#listTable").data("searchData", dataReceived.data.searchData);
+			$("#listTable").trigger("reloadGrid");
 		}, true, 10000, false, function(dataReceived) {
-			console.log("aaa")
+			$("#countRow").text(dataReceived.data.countRow);
+			$("#listTable").data("searchData", dataReceived.data.searchData);
+			$("#listTable").trigger("reloadGrid");
 		});
 		window.location.hash = '';
 	});
+
+	function initListTable(request, response) {
+		var searchData = $("#listTable").data("searchData");
+		var page = request == undefined ? 1 : request.page;
+		var rows = request == undefined ? 10 : request.rowNum;
+		var sord = request == undefined ? 'asc' : request.sortOrder;
+		var sidx = request == undefined ? 'candidate_id' : request.sortIndex;
+		if (searchData) {
+			searchData.sort(function(a, b) {
+				if (a[sidx] < b[sidx]) {
+					return sord == 'asc' ? -1 : +1;
+				}
+				if (a[sidx] > b[sidx]) {
+					return sord == 'asc' ? +1 : -1;
+				}
+				return 0;
+			});
+			var result = {
+				page : page,
+				total : searchData.length,
+				data : searchData.slice(rows * (page - 1), rows * page)
+			};
+			response(result);
+		}
+	}
 </script>

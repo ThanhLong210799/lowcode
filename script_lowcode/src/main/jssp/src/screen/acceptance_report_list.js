@@ -8,15 +8,6 @@ function searchAction(request) {
   var ajaxResultObj = new Object();
   var searchResult = {};
   try {
-//	  var sqlParam = {
-//		  contractNo : "",
-//	  projectName : "",
-//	  acceptanceStatus : "",
-//	  startDate : null,
-//	  endDate : null,
-//	  contractPaymentDate : null
-//		  };
-
 
     searchResult = querySearchMaster(sqlParam);
 

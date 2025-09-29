@@ -6,8 +6,7 @@ select
   tcm.customer_name,
   tqf.project_name,
   tc.person_in_charge,
-  to_char(tc.contract_start_date, 'YYYY/MM/DD') as start_date,
-  to_char(tc.contract_end_date, 'YYYY/MM/DD') as end_date,
+  to_char(tc.contract_start_date, 'YYYY/MM/DD') || ' ～ ' || to_char(tc.contract_end_date, 'YYYY/MM/DD') as contract_period,
   to_char(tcp.contract_payment_date, 'YYYY/MM/DD') as contract_payment_date,
   mc.type_name
 from 
