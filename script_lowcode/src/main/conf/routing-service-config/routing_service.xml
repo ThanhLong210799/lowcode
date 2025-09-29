@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routing-service-config
+	xmlns="http://www.intra-mart.jp/router/routing-service-config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.intra-mart.jp/router/routing-service-config routing-service-config.xsd ">
+	<authz-default mapper="welcome-all" />
+	
+<!-- 	<service-group name="demo">
+        <service name="HelloService" class="service.HelloService"/>
+    </service-group> -->
+
+	<service-mapping path="say-hello"
+		application="contentssearch" service="search" >
+
+		<authz uri="service://search" action="execute" />
+	</service-mapping>
+</routing-service-config>

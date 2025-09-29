@@ -1,0 +1,191 @@
+<imart type="head"> <imart type="workflowOpenPageCsjs" /> <script
+	src="ui/libs/jquery-validation-1.9.0/jquery.validate.js"></script> <script
+	type="text/javascript">
+	$(function () {
+        $('#openPage').click(function () {
+            var errMsg =  checkInput(false);
+            if(errMsg.length > 0){
+                imuiShowErrorMessage(errMsg);
+                return false;
+            } else{
+            workflowOpenPage('3');
+            return false;
+            }
+        });
+
+        $('#back').click(function () {
+            $('#backForm').submit();
+            return false;
+        });
+    });
+    
+    function validateHour(hour) {
+        var value = hour.value;
+        var pattern = "^[0-9]*$";
+        if(value > 23 || !value.match(pattern)){
+            document.getElementById(hour.id).value = "";
+        }
+        if(value.length == 1 && value.match(pattern)){
+            document.getElementById(hour.id).value = "0" + value;
+        }
+    }
+    
+    function validateMinute(minute) {
+        var value = minute.value;
+        var pattern = "^[0-9]*$";
+        if(value > 59 || !value.match(pattern)){
+            document.getElementById(minute.id).value = "";
+        }
+        if(value.length == 1 && value.match(pattern)){
+            document.getElementById(minute.id).value = "0" + value;
+        }
+    }
+    // エラーメッセージから引数を文字列にreplace処理
+     function replaceErr(target, num, str){
+      return target.replace("{" + num + "}", str);
+    } 
+    
+     function checkInput(isTemp){      
+        var errMsg = [];
+        
+        var selectedValue = $('#leave_type').find(":selected").val();
+        if(selectedValue == ""){
+            var errProp = '<imart type="message" id="MSG-ERR-0013" locale="ja"/>';
+            errMsg.push(replaceErr(errProp, 0, "休暇種類"));
+        }
+        
+        if($("#start_date").val() == ""|| $("#start_date").val() == null   || $("#start_hour").val() == "" || $("#start_hour").val() == null ||
+        $("#start_minute").val() == "" || $("#start_minute").val() == null || $("#end_date").val() == "" || $("#end_date").val() == null ||
+        $("#end_hour").val() == "" || $("#end_hour").val() == null || $("#end_minute").val() == "" || $("#end_minute").val() == null){
+            var errProp = '<imart type="message" id="MSG-ERR-0013" locale="ja"/>';
+            errMsg.push(replaceErr(errProp, 0, "休暇時間"));
+        }else{
+            var validDate = checkDateCondition();
+            if(validDate == 1){
+                var errProp = '<imart type="message" id="MSG-ERR-0014" locale="ja"/>';
+                errMsg.push(errProp);
+            }
+        }
+         if( $("#reason").val() == "" ||  $("#reason").val() == null ){
+            var errProp = '<imart type="message" id="MSG-ERR-0013" locale="ja"/>';
+            errMsg.push(replaceErr(errProp, 0, "理由"));
+        }else{
+            var pattern = /^[^\x01-\x7E\uFF61-\uFF9F]+$/;
+            if(!($("#reason").val().match(pattern))){
+                var errProp = '<imart type="message" id="MSG-ERR-0012" locale="ja"/>';
+                errMsg.push(replaceErr(errProp, 0, "理由"));
+            }
+        }
+        return errMsg;
+    }  
+     function checkDateCondition(){     
+        var startDate = $("#start_date").val().replaceAll("/","-");
+        var startTime = $("#start_hour").val() + ":" + $("#start_minute").val()+ ":00";
+        var startDay = new Date(""+ startDate + "T" + startTime+ "Z").toUTCString();
+        var endDate = $("#end_date").val().replaceAll("/","-");
+        var endTime = $("#end_hour").val() + ":" + $("#end_minute").val()+ ":00";
+        var endDay = new Date(""+ endDate + "T" + endTime+ "Z").toUTCString();
+        var resultCheck = (Date.parse(startDay) <= Date.parse(endDay)) ? 0: 1 ;
+        return resultCheck;
+    } 
+    function checkInputDate(date){
+         var value = date.value;
+         var pattern = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/; 
+         if(!value.match(pattern) || new Date(value) == "Invalid Date"){
+             document.getElementById(date.id).value = "";
+         }
+     } 
+	</script>
+	<style>
+		.wd-30px {
+			width: 30px;
+		}
+		
+		.wd-80px {
+			width: 80px;
+		}
+	</style>
+</imart>
+
+<imart type="workflowOpenPage" name="workflowOpenPageForm"
+	id="workflowOpenPageForm" method="POST" target="_top"
+	imwUserDataId=$data.imwUserDataId
+	imwSystemMatterId=$data.imwSystemMatterId
+	imwAuthUserCode=$data.imwAuthUserCode
+	imwApplyBaseDate=$data.imwApplyBaseDate imwNodeId=$data.imwNodeId
+	imwFlowId=$data.imwFlowId
+	imwCallOriginalParams=$data.imwCallOriginalParams
+	imwNextScriptPath=$data.imwCallOriginalPagePath>
+
+<div class="imui-title">
+	<h1>
+		<imart type="string" value="休暇申請書" escapeXml="true" escapeJs="false" />
+	</h1>
+</div>
+<div class="imui-toolbar-wrap">
+	<div class="imui-toolbar-inner">
+		<ul class="imui-list-toolbar">
+			<li><imart type="tag" tagname="a" href="javascript: void(0);"
+					id="back" class="imui-toolbar-icon" title="Back"> <span
+					class="im-ui-icon-common-16-back"></span> </imart></li>
+		</ul>
+	</div>
+</div>
+
+<div class="imui-form-container-wide">
+	<header class="imui-chapter-title">
+		<h2>休暇申請情報</h2>
+	</header>
+	<table class="imui-form">
+		<tbody>
+			<tr>
+				<th class="wd-20"><label class="imui-required">社員番号 </label></th>
+				<td><input type="text" id="staff_cd" name="staff_cd"
+					value='<imart type="string" value=$item.staff_cd />' readonly /></td>
+			</tr>
+			<tr>
+				<th class="wd-20"><label class="imui-required">社員名称</label></th>
+				<td><input type="text" id="staff_nm" name="staff_nm" value='<imart type="string" value=$item.staff_name />' readonly /></td>
+			</tr>
+			<tr>
+				<th class="wd-20"><label class="imui-required">休暇種類 </label></th>
+				<td><imart type="imuiSelect" id="leave_type" name="leave_type" list=leave_type /></td>
+			</tr>
+			<tr>
+				<th class="wd-20"><label class="imui-required">休暇時間</label></th>
+				<td>
+				    <input type="text" id="start_hour" name="start_hour" value='<imart type="string" value=$item.start_hour />' class="wd-30px" onchange="validateHour(this)" maxlength="2"/>
+				    <label> : </label> 
+				    <input type="text" id="start_minute" name="start_minute" value='<imart type="string" value=$item.start_minute />' class="wd-30px" onchange="validateMinute(this)" maxlength="2"/> 
+				    <input type="text" id="start_date" name="start_date" class="wd-80px" value='<imart type="string" value=$item.start_date />' onchange="validateMinute(this)"/> 
+				    <imart type="imuiCalendar" onClose="onClose" floatable="true" altField="#start_date" showMonthAfterYear=false />
+				    <label class="ml-5 mr-5">～</label> 
+				    <input type="text" id="end_hour" name="end_hour" value='<imart type="string" value=$item.end_hour />' class="wd-30px" onchange="validateHour(this)" maxlength="2"/> 
+				    <label> : </label> 
+				    <input type="text" id="end_minute" name="end_minute" value='<imart type="string" value=$item.end_minute />' class="wd-30px" onchange="validateMinute(this)" maxlength="2"/>
+				    <input type="text" id="end_date"name="end_date" class="wd-80px" value='<imart type="string" value=$item.end_date />' onchange="validateMinute(this)"/> 
+				    <imart type="imuiCalendar" onClose="onClose" floatable="true" altField="#end_date" showMonthAfterYear=false /></td>
+			</tr>
+			<tr>
+				<th class="wd-20"><label class="imui-required">理由 </label></th>
+				<td>
+				   <textarea id="reason" name="reason" style="width:500px; maxWidth:100%" maxlength="500"><imart type="string" value=$item.reason escapeXml="true" escapeJs="false"  /></textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="imui-operation-parts">
+		<imart type="imuiButton" value="再申請" id="openPage"
+			name="openPage" class="imui-large-button" escapeXml="true"
+			escapeJs="false" />
+
+	</div>
+</div>
+</imart>
+
+<imart type="tag" tagname="form" name="backForm" id="backForm"
+	method="POST" action=$data.imwCallOriginalPagePath escapeXml="true"
+	escapeJs="false"> <imart type="hidden"
+	imwCallOriginalParams=$data.imwCallOriginalParams escapeXml="true"
+	escapeJs="false" /> </imart>
+

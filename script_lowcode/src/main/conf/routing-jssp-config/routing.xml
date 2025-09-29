@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routing-jssp-config
+	xmlns="http://www.intra-mart.jp/router/routing-jssp-config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.intra-mart.jp/router/routing-jssp-config routing-jssp-config.xsd ">
+	<authz-default mapper="welcome-all" />
+	<file-mapping path="/search_screen" page="/screen/search" />
+	<file-mapping path="/search_screen/searchAction" page="/screen/search" action="searchAction"/>
+	<file-mapping path="/search_screen/updateCandidate" page="/screen/search" action="updateCandidate"/>
+	
+	<file-mapping path="/register_screen" page="/screen/register" />
+	<file-mapping path="/register_screen/uploadFile" page="/screen/uploadFile"/>
+	<file-mapping path="/register_screen/saveData" page="/screen/register" action="saveData" />
+	
+	<file-mapping path="/test" page="/screen/index" />
+	<file-mapping path="/test/searchAction" page="/screen/index" action="searchAction"/>
+	
+	<file-mapping path="/acceptance_report_list" page="/screen/acceptance_report_list" /> 
+	<file-mapping path="acceptance_report_list/searchAction" page="/screen/acceptance_report_list" action="searchAction"/>
+</routing-jssp-config>

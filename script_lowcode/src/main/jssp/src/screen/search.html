@@ -1,0 +1,253 @@
+<!-- ⓪ head Tag-->
+<imart type="head">
+<title><imart type="string" value="ユーザー情報検索画面" escapeJs="true"
+    escapeXml="true" /></title>
+<link rel="stylesheet" type="text/css"
+  href="ui/libs/jquery.jqGrid-4.3.3/css/ui.jqgrid.css" />
+</imart>
+
+<style>
+.ui-widget-content {
+	overflow: initial !important;
+}
+
+#detailTable .ui-jqgrid-bdiv, #detailTable .ui-widget, #detailTable .ui-jqgrid-hdiv,
+	#detailTable .ui-jqgrid-view, #detailTable .ui-jqgrid-pager {
+	width: auto !important;
+}
+</style>
+
+<header class="imui-title">
+  <h1>
+    <imart type="string" value="ユーザー情報検索画面" escapeJs="true"
+      escapeXml="true" />
+  </h1>
+</header>
+<div style="padding: 10px 20px;">
+  <imart type="imuiShowIcon" iconId="im-ui-icon-common-16-new_16"
+    style="width: 64px; height: 64px;" />
+  <a href="register_screen">新規作成</a>
+</div>
+
+<imart type="imuiGadgetBar"> <imart type="imuiGadgetItem"
+  style="padding: 10px 20px;" title="検索条件">
+<table class="imui-form ">
+  <tr>
+    <th style="width: 250px;"><label>氏名</label></th>
+    <td><imart type="imuiTextbox" id="txtBox_fullName" /></td>
+    <td><imart type="imuiCheckbox" label="論理削除データ表示"
+        id="ckBox_deleteFlag" /></td>
+  </tr>
+  <tr>
+    <th><label>ユーザー名</label></th>
+    <td colspan="2"><imart colspan="2" type="imuiTextbox"
+        id="txtBox_userName" /></td>
+  </tr>
+</table>
+<div>
+  <input type="button" value="検索" class="imui-medium-button"
+    id="btnSearch"> <input type="button" value="クリア"
+    class="imui-medium-button" id="btnClear">
+</div>
+</imart> <br />
+
+<imart type="imuiGadgetItem" title="検索結果">
+<div
+  style="padding: 10px; display: flex; justify-content: space-between;">
+  <div id="btnDel" style="cursor: pointer;">
+    <imart type="imuiShowIcon" iconId="im-ui-icon-common-16-trashbox_16"
+      style="width: 64px; height: 64px;" />
+    <span>削除</span>
+  </div>
+  <div align="right">
+    <span id="countRow"> <imart type="string"
+        value=$bind.countRow escapeJs="true" escapeXml="true" />
+    </span> <span>件</span>
+  </div>
+</div>
+<div id="detailTable">
+  <imart type="imuiListTable" id="listTable" target="initListTable"
+    process="csjs" multiSelect="true" shrinkToFit="true"
+    viewRecords="true" onCellSelect="onCellSelect"> <pager
+    rowNum="10" rowList="10,20,50,100" /> <cols>
+  <col name="infor" id="infor" align="center" style="width: 40px;">
+  <showIcon iconClass="im-smart-icon-common-16-information" />
+  </col>
+  <col name="edit" id="edit" align="center" style="width: 40px;"
+    colspan="1">
+  <showIcon iconClass="im-ui-icon-common-16-update" />
+  </col>
+  <col name="del" id="del" align="center" style="width: 40px;">
+  <showIcon iconClass="iconClassDelete" />
+  </col>
+  <col name="candidate_id" caption="候補者ID" sortable="true"
+    id="candidate_id" />
+  <col name="full_name" caption="氏名" sortable="true" id="full_name" />
+  <col name="phone_number" caption="電話番号" sortable="true"
+    id="phone_number" />
+  <col name="apply_position_developer" caption="応募職位_開発者　"
+    sortable="true" id="apply_position_developer" />
+  <col name="apply_position_tester" caption="応募職位_テスター" sortable="true"
+    id="apply_position_tester" />
+  <col name="birth_day" caption="生年月日" sortable="true" id="birth_day" />
+  <col name="language" caption="外国語" sortable="true" id="language" />
+  <col name="gender" caption="性別" sortable="true" id="gender" />
+  <col name="introduction_person" caption="紹介者" sortable="true"
+    id="introduction_person" />
+  <col name="note" caption="備考" sortable="true" id="note" />
+  <col name="user_name" caption="ユーザー名" sortable="true" id="user_name" />
+  <col name="delete_flag" caption="削除" sortable="true" id="delete_flag" />
+  <col name="dltflg" hidden="true" />
+  </cols> </imart>
+</div>
+</imart> </imart>
+
+<form id="actionForm" name="actionForm" method="post">
+  <imart type="imuiTextbox" id="callActionParams"
+    name="callActionParams" hidden />
+</form>
+
+<script type="text/javascript">
+  var idSelect;
+  var rowSelect;
+  $('#btnClear').bind('click', function() {
+    $("#txtBox_fullName").val('');
+    $("#txtBox_userName").val('');
+    $("#ckBox_deleteFlag").attr('checked', false);
+  })
+ 
+  $("#btnSearch").on("click",
+      function() {
+        $("#listTable").jqGrid("clearGridData");
+        var is_checked =  $('#ckBox_deleteFlag').bind('click', function(){});
+        var callActionParams = {
+          full_name : $("#txtBox_fullName").val(),
+          user_name : $("#txtBox_userName").val(),
+          delete_flag : is_checked[0].checked == true ? 1 : 0
+        };
+        $("#callActionParams").val(JSON.stringify(callActionParams));
+        $("#actionForm").attr("action", "search_screen/searchAction");
+        imuiAjaxSend("#actionForm", "POST", "json", $.noop, function(data) {
+          var dataReceived = ImJson.parseJSON(data.responseText) ;
+          $("#countRow").text(dataReceived.data.countRow);
+          $("#listTable").data("searchData", dataReceived.data.searchData);
+          $("#listTable").trigger("reloadGrid");
+        }, true,
+            10000, false, function(dataReceived) {
+              if(dataReceived && dataReceived.data && dataReceived.data.countRow) {
+                $("#countRow").text(dataReceived.data.countRow);
+                $("#listTable").data("searchData", dataReceived.data.searchData);
+                $("#listTable").trigger("reloadGrid");
+              }});
+         window.location.hash = '';
+  });
+
+  function initListTable(request, response) {
+    var searchData = $("#listTable").data("searchData");
+    var page = request == undefined ? 1 : request.page;
+    var rows = request == undefined ? 10 : request.rowNum;
+    var sord = request == undefined ? 'asc' : request.sortOrder;
+    var sidx = request == undefined ? 'candidate_id' : request.sortIndex;
+ 	if(searchData){
+ 	  searchData.sort(function(a,b) {
+      if (a[sidx] < b[sidx]) {
+         return sord == 'asc' ? -1 : +1;
+        }
+      if (a[sidx] > b[sidx]) {
+         return sord == 'asc' ? +1 : -1;
+        }
+      return 0;
+      });
+    var result = {
+      page: page,
+      total: searchData.length,
+      data: searchData.slice(rows * (page - 1), rows * page)
+    };
+    response(result);
+ 	}
+  }
+
+  iconClassDelete = function(cellvalue, options, rowdata) {
+      // 削除フラグ
+      if (rowdata && rowdata[15] === 0) {
+          return "im-ui-icon-common-16-trashbox";
+      }
+      return "";
+  }
+
+  function onCellSelect(rowId, iCol, cellcontent, e) {
+    var searchData = $("#listTable").data("searchData");
+    rowSelect = rowId - 1;
+    if (iCol == "1" || iCol == "2") {
+      window.location.hash = "id=" + searchData[rowSelect].candidate_id;
+    }
+    idSelect = searchData[rowSelect].candidate_id;
+    if ($(cellcontent).hasClass("im-ui-icon-common-16-trashbox")) {
+      if (searchData[rowSelect].delete_flag == "") {
+        imuiConfirm('データを削除します。よろしいですか？', '削除', function() {
+          var newObj = {};
+          var listCandidateId=[]
+          var searchData = $("#listTable").data("searchData");
+          var multiSelect = $('#listTable').getGridParam('selarrrow');
+          var is_checked =  $('#ckBox_deleteFlag').bind('click', function(){});
+          for (var row of multiSelect){
+            var is_checked =  $('#ckBox_deleteFlag').bind('click', function(){});
+            newObj.candidate_id = searchData[row-1].candidate_id;
+            newObj.full_name = $("#txtBox_fullName").val(),
+            newObj.user_name = $("#txtBox_userName").val(),
+            newObj.delete_flag = is_checked[0].checked == true ? 1 : 0
+            listCandidateId.push(newObj);
+            newObj={};
+          };
+          $("#callActionParams").val(JSON.stringify(listCandidateId));
+          $("#actionForm").attr("action", "search_screen/updateCandidate");
+          imuiAjaxSend("#actionForm", "POST", "json", $.noop, $.noop, true,
+          10000, false, function(dataReceived) {
+            $("#btnSearch").click();
+          });
+        });
+      }else{
+        imuiAlert('本レコードを削除できません。', 'エラー');
+      }
+    }
+      $('#btnDel').bind('click', function() {
+        var searchData = $("#listTable").data("searchData");
+        var multiSelect = $('#listTable').getGridParam('selarrrow');
+        var arr = []
+        for (var row of multiSelect){
+          if (searchData[row-1].delete_flag != "") {
+          arr.push(searchData[row-1].delete_flag)
+          }
+        }
+        if(arr.length > 0){
+          imuiAlert('本レコードを削除できません。', 'エラー');
+        }else{ 
+          imuiConfirm('選択されたレコードを削除します。よろしいですか？', '削除', function() {
+            var newObj = {};
+            var listCandidateId=[]
+            var searchData = $("#listTable").data("searchData");
+            var multiSelect = $('#listTable').getGridParam('selarrrow');
+            var is_checked =  $('#ckBox_deleteFlag').bind('click', function(){});
+            for (var row of multiSelect){
+              var is_checked =  $('#ckBox_deleteFlag').bind('click', function(){});
+              newObj.candidate_id = searchData[row-1].candidate_id;
+              newObj.full_name = $("#txtBox_fullName").val(),
+              newObj.user_name = $("#txtBox_userName").val(),
+              newObj.delete_flag = is_checked[0].checked == true ? 1 : 0
+              listCandidateId.push(newObj);
+              newObj={};
+            };
+            $("#callActionParams").val(JSON.stringify(listCandidateId));
+            $("#actionForm").attr("action", "search_screen/updateCandidate");
+            imuiAjaxSend("#actionForm", "POST", "json", $.noop, $.noop, true,
+            10000, false, function(dataReceived) {
+              $("#btnSearch").click();
+            });
+          });
+        }
+      })
+}
+  function onCellAttr(rowId, val, rawObject, cm, rdata) {
+    return 'style="cursor:pointer;"';
+  }
+</script>

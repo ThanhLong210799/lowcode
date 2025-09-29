@@ -1,0 +1,50 @@
+
+<!-- ⓪ head Tag-->
+<imart type="head">
+<title><imart type="string" value="ユーザー情報検索画面" escapeJs="true"
+    escapeXml="true" /></title>
+<link rel="stylesheet" type="text/css"
+  href="ui/libs/jquery.jqGrid-4.3.3/css/ui.jqgrid.css" />
+</imart>
+
+<style>
+.ui-widget-content {
+	overflow: initial !important;
+}
+
+#detailTable .ui-jqgrid-bdiv, #detailTable .ui-widget, #detailTable .ui-jqgrid-hdiv,
+	#detailTable .ui-jqgrid-view, #detailTable .ui-jqgrid-pager {
+	width: auto !important;
+}
+</style>
+
+<header class="imui-title">
+  <h1>
+    <imart type="string" value="ユーザー情報検索画面" escapeJs="true"
+      escapeXml="true" />
+  </h1>
+</header>
+
+<div>
+<imart colspan="2" type="imuiTextbox"
+        id="txtBox_userName" /></td>
+  </tr>
+  <input type="button" value="検索" class="imui-medium-button"
+    id="btnSearch"> 
+</div>
+<form id="actionForm" name="actionForm" method="post">
+  <imart type="imuiTextbox" id="callActionParams"
+    name="callActionParams" hidden />
+</form>
+<script type="text/javascript">
+$("#btnSearch").on("click",
+	      function() {
+	        $("#actionForm").attr("action", "test/searchAction");
+	        imuiAjaxSend("#actionForm", "POST", "json", $.noop, function(data) {
+	        	document.getElementById("txtBox_userName").value  = data.responseText
+	          console.log(data.responseText)
+	        });
+
+	  });
+</script>
+

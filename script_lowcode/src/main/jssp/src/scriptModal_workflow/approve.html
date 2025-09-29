@@ -1,0 +1,103 @@
+<imart type="head">
+    <imart type="workflowOpenPageCsjs" />
+    <script src="ui/libs/jquery-validation-1.9.0/jquery.validate.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#openPage').click(function () {
+                workflowOpenPage('4');
+                return false;
+            });
+            $('#back').click(function() {
+                $('#backForm').submit();
+                return false;
+            });
+        });
+    </script>
+<style>
+	.wd-30px {
+	    width: 30px;
+	}
+	
+	.wd-80px {
+	    width: 80px;
+	}
+</style>
+</imart>
+
+<imart type="workflowOpenPage" name="workflowOpenPageForm" id="workflowOpenPageForm" method="POST" target="_top"
+    imwUserDataId=$data.imwUserDataId imwSystemMatterId=$data.imwSystemMatterId imwAuthUserCode=$data.imwAuthUserCode
+    imwApplyBaseDate=$data.imwApplyBaseDate imwNodeId=$data.imwNodeId imwFlowId=$data.imwFlowId
+    imwCallOriginalParams=$data.imwCallOriginalParams imwNextScriptPath=$data.imwCallOriginalPagePath>
+
+    <div class="imui-title">
+        <h1>
+            <imart type="string" value="休暇申請書" escapeXml="true" escapeJs="false" />
+        </h1>
+    </div>
+    <div class="imui-toolbar-wrap">
+        <div class="imui-toolbar-inner">
+            <ul class="imui-list-toolbar">
+                <li>
+                    <imart type="tag" tagname="a" href="javascript: void(0);" id="back" class="imui-toolbar-icon"
+                        title="Back"> <span class="im-ui-icon-common-16-back"></span> </imart>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="imui-form-container-wide">
+        <header class="imui-chapter-title">
+            <h2>休暇申請情報</h2>
+        </header>
+        <table class="imui-form">
+            <tbody>
+                <tr>
+                    <th class="wd-20"><label>社員番号</label></th>
+                    <td><input type="text" id="staff_cd" name="staff_cd"
+                            value='<imart type="string" value=$item.staff_cd />' disabled /></td>
+                </tr>
+                <tr>
+                    <th class="wd-20"><label>社員名称</label></th>
+                    <td><input type="text" id="staff_nm" name="staff_nm"
+                            value='<imart type="string" value=$item.staff_name />' disabled /></td>
+                </tr>
+                <tr>
+                    <th class="wd-20"><label>休暇種類</label></th>
+                    <td>
+                        <imart type="imuiSelect" id="leave_type" name="leave_type" list=leave_type disabled="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="wd-20"><label>休暇時間</label></th>
+                    <td>
+                        <input type="text" id="start_hour" name="start_hour" value='<imart type="string" value=$item.start_hour />' class="wd-30px" disabled/>
+                        <label> : </label> 
+                        <input type="text" id="start_minute" name="start_minute" value='<imart type="string" value=$item.start_minute />' class="wd-30px" disabled/>
+                        <input type="text" id="start_date" name="start_date" class="wd-80px" value='<imart type="string" value=$item.start_date />' disabled/>
+                        <label class="ml-5 mr-5">～</label> 
+                        <input type="text" id="end_hour" name="end_hour" value='<imart type="string" value=$item.end_hour />' class="wd-30px" disabled/>
+                        <label> : </label> 
+                        <input type="text" id="end_minute" name="end_minute" value='<imart type="string" value=$item.end_minute />' class="wd-30px" disabled/> 
+                        <input type="text" id="end_date" name="end_date" class="wd-80px" value='<imart type="string" value=$item.end_date />' disabled/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="wd-20"><label>理由</label></th>
+                    <td>
+                        <imart type="imuiTextArea" value="" width="500px" maxWidth="100%" disabled><imart type="string" value=$item.reason /></imart>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="imui-operation-parts">
+            <imart type="imuiButton" value="承認" id="openPage" name="openPage" class="imui-large-button"
+                escapeXml="true" escapeJs="false" />
+
+        </div>
+    </div>
+</imart>
+
+<imart type="tag" tagname="form" name="backForm" id="backForm" method="POST" action=$data.imwCallOriginalPagePath
+    escapeXml="true" escapeJs="false">
+    <imart type="hidden" imwCallOriginalParams=$data.imwCallOriginalParams escapeXml="true" escapeJs="false" />
+</imart>

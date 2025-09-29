@@ -1,0 +1,95 @@
+
+<!-- ⓪ head Tag-->
+<imart type="head">
+<title><imart type="string" value="ユーザー情報検索画面" escapeJs="true"
+		escapeXml="true" /></title>
+<link rel="stylesheet" type="text/css"
+	href="ui/libs/jquery.jqGrid-4.3.3/css/ui.jqgrid.css" />
+</imart>
+
+<style>
+.ui-widget-content {
+	overflow: initial !important;
+}
+
+#detailTable .ui-jqgrid-bdiv, #detailTable .ui-widget, #detailTable .ui-jqgrid-hdiv,
+	#detailTable .ui-jqgrid-view, #detailTable .ui-jqgrid-pager {
+	width: auto !important;
+}
+</style>
+
+<header class="imui-title">
+	<h1>
+		<imart type="string" value="Danh sách biên bản nghiệm thu"
+			escapeJs="true" escapeXml="true" />
+	</h1>
+</header>
+
+<table class="imui-form ">
+	<tr>
+		<th style="width: 250px;"><label>Mã hợp đồng</label></th>
+		<td><imart type="imuiTextbox" id="txtBox_contractNo" /></td>
+		<th style="width: 250px;"><label>Tên dự án</label></th>
+		<td><imart type="imuiTextbox" id="txtBox_projectName" /></td>
+	</tr>
+	<tr>
+		<th style="width: 250px;"><label>Trạng thái</label></th>
+		<td><imart type="imuiSelect" id="txtBox_acceptanceStatus" /></td>
+		<th style="width: 250px;"><label>Ngày thanh toán dự kiến</label></th>
+		<td><input type="text" id="txtBox_contractPaymentDate" /> <imart
+				type="imuiCalendar" changeMonth="true" changeYear="true"
+				floatable="true" altField="#txtBox_contractPaymentDate" /></td>
+	</tr>
+	<tr>
+		<th><label>Thời gian làm việc</label></th>
+		<td colspan="4"><input type="text" id="txtBox_startDate" /> <imart
+				type="imuiCalendar" changeMonth="true" changeYear="true"
+				floatable="true" altField="#txtBox_startDate" /> <span>~</span> <input
+			type="text" id="txtBox_endDate" /> <imart type="imuiCalendar"
+				changeMonth="true" changeYear="true" floatable="true"
+				altField="#txtBox_endDate" /></td>
+
+	</tr>
+</table>
+<div>
+	<input type="button" value="検索" class="imui-medium-button"
+		id="btnSearch"> <input type="button" value="クリア"
+		class="imui-medium-button" id="btnClear">
+</div>
+
+
+<form id="actionForm" name="actionForm" method="post">
+	<imart type="imuiTextbox" id="callActionParams" name="callActionParams"
+		hidden />
+</form>
+
+<script type="text/javascript">
+	$('#btnClear').bind('click', function() {
+		$("#txtBox_contractNo").val('');
+		$("#txtBox_projectName").val('');
+		$("#txtBox_acceptanceStatus").val('');
+		$("#txtBox_contractPaymentDate").val('');
+		$("#txtBox_startDate").val('');
+		$("#txtBox_endDate").val('');
+	})
+
+	$("#btnSearch").on("click", function() {
+		var callActionParams = {
+			contractNo : $("#txtBox_contractNo").val(),
+			projectName : $("#txtBox_projectName").val(),
+			acceptanceStatus : "",
+			startDate : $("#txtBox_startDate").val(),
+			endDate : $("#txtBox_endDate").val(),
+			contractPaymentDate : $("#txtBox_contractPaymentDate").val()
+		};
+		$("#callActionParams").val(JSON.stringify(callActionParams));
+		$("#actionForm").attr("action", "acceptance_report_list/searchAction");
+		imuiAjaxSend("#actionForm", "POST", "json", $.noop, function(data) {
+			var dataReceived = ImJson.parseJSON(data.responseText);
+			console.log(dataReceived)
+		}, true, 10000, false, function(dataReceived) {
+			console.log("aaa")
+		});
+		window.location.hash = '';
+	});
+</script>

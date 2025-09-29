@@ -1,0 +1,321 @@
+<imart type="head">
+  <title>
+    <imart type="string" value="応募登録画面" escapeJs="true" escapeXml="true" />
+  </title>
+  <link rel="stylesheet" type="text/css" href="ui/libs/jquery.jqGrid-4.3.3/css/ui.jqgrid.css" />
+  <script src="ui/libs/jquery-validation-1.9.0/jquery.validate.js"></script>
+  <imart type="imuiValidationRule" rule="screen/validate#init" rulesName="rules" messagesName="messages"></imart>
+</imart>
+<style> 
+
+
+<!-- title screen -->
+<header class="imui-title">
+  <h1>
+    <imart type="string" value="応募登録画面" escapeJs="true" escapeXml="true" />
+  </h1>
+</header>
+<!-- toolbar  -->
+<div class="imui-toolbar-wrap">
+  <div class="imui-toolbar-inner d-flex justify-content-between">
+    <ul class="imui-list-toolbar">
+      <li><a href=# id="btnBack" class="imui-toolbar-icon"><span class="im-ui-icon-common-16-back"></span></a></li>
+    </ul>
+    <ul class="imui-list-toolbar-utility">
+      <li><a onClick="window.location.reload();" class="imui-toolbar-icon"><span
+            class="im-ui-icon-common-16-refresh"></span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- logo -->
+<div class="logo">
+  <a href="https://www.intra-mart.com/"> <img style="margin-left: 5px;"
+      src="https://www.intra-mart.com/images/header_logo01.png" />
+  </a>
+</div>
+
+<!-- input form -->
+<div id="imui-container-inner">
+  <div class="imui-box-operation">
+    <form name="inputForm" id="inputForm" method="post" autocomplete="off" enctype="multipart/form-data"
+      action="./register_screen/uploadFile">
+      <imart type="imuiGadgetBar">
+        <imart type="imuiGadgetItem">
+          <div class="imui-box-operation cf">
+            <div class="imui-chapter-title">
+              <h2>応募者の情報</h2>
+            </div>
+            <table class="imui-form">
+              <tbody>
+                <tr>
+                  <th><label class="imui-required">
+                      <imart type="string" value="氏名" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <imart type="imuiTextbox" id="txtBox_fullName" name="fullName" />
+                  </td>
+                </tr>
+                <tr>
+                  <th><label class="imui-required">
+                      <imart type="string" value="電話番号" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <imart type="imuiTextbox" id="txtBox_phoneNumber" name="phoneNumber" />
+                  </td>
+                </tr>
+                <tr>
+                  <th><label>
+                      <imart type="string" value="応募職位" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <imart type="imuiCheckbox" id="chBox_applyPositionDeveloper" label="開発者" />
+                    <imart type="imuiCheckbox" id="chBox_applyPositionTester" label="テスター" />
+                  </td>
+                </tr>
+                <tr>
+                  <th><label>
+                      <imart type="string" value="生年月日" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td><input type="text" id="txtBox_birthDay" />
+                    <imart type="imuiCalendar" changeMonth="true" changeYear="true" floatable="true" maxDate="2000/04/01"
+                      altField="#txtBox_birthDay" />
+                  </td>
+                </tr>
+                <tr>
+                  <th><label>
+                      <imart type="string" value="外国語" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <script type="text/javascript">
+                      function getLanguage() {
+                        newObj.language = this.options[this.selectedIndex].value;
+                      }
+                    </script>
+                    <imart type="imuiSelect" id="cbBox_language" list=langList onChange="getLanguage" />
+                  </td>
+                </tr>
+                <tr>
+                  <th><label>
+                      <imart type="string" value="性別" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <imart type="imuiRadio" name="radio" label="男" value="0" />
+                    <imart type="imuiRadio" name="radio" label="女" value="1" />
+                  </td>
+                </tr>
+                <tr>
+                  <th><label>
+                      <imart type="string" value="履歴書" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <imart type="imuiFileUpload" enableDelete acceptFileTypes="/(\.)(pdf)$/i" outerFormId="inputForm"
+                    storeTo="/upload" onSuccess="callbackSuccess" onError="callbackError" maxNumberOfFiles="1" />
+                  </td>
+                </tr>
+                <tr>
+                  <th><label>
+                      <imart type="string" value="自己紹介" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <imart type="imuiRichtextbox" width="500px" id="txtBox_selfIntroduction" />
+                  </td>
+                </tr>
+                <tr>
+                  <th><label>
+                      <imart type="string" value="紹介者" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <imart type="imuiTextbox" readonly id="txtBox_introductionPerson" name="introductionPerson" />
+                    <imart type="imACMSearch" /> <a id="search" class="imui-toolbar-icon" title="戻る"> <span
+                        class="im-ui-icon-common-16-search"></span>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <th><label>
+                      <imart type="string" value="備考" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <imart type="imuiTextArea" id="txtArea_note" name="note" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </imart>
+      </imart>
+      <br />
+      <imart type="imuiGadgetBar">
+        <imart type="imuiGadgetItem">
+          <div class="imui-box-operation cf">
+            <div class="imui-chapter-title">
+              <h2>アカウントの情報</h2>
+            </div>
+            <table class="imui-form">
+              <tbody>
+                <tr>
+                  <th><label>
+                      <imart type="string" value="ユーザー名" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td>
+                    <imart type="imuiTextbox" id="txtBox_userName" name="userName" readonly
+                      onfocus="this.removeAttribute('readonly');" />
+                  </td>
+                  <td>
+                    <imart type="imuiToggle" id="toggle_allowLogin" checked="checked" class="imui-small-button"
+                      selectionType="checkbox" label="ログイン許可" />
+                  </td>
+                </tr>
+                <tr>
+                  <th><label id="">
+                      <imart type="string" value="パスワード" escapeXml="true" escapeJs="true" />
+                    </label></th>
+                  <td colspan="2">
+                    <imart type="imuiPassword" id="txtBox_password" name="password" readonly
+                      onfocus="this.removeAttribute('readonly');" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </imart>
+      </imart>
+      <br />
+      <imart type="imuiButton" value="登録" onClick="onSave()" class="imui-large-button" />
+    </form>
+  </div>
+</div>
+<form id="actionForm" name="actionForm" method="post">
+  <imart type="imSecureToken" />
+  <imart type="imuiTextbox" id="callActionParams" name="callActionParams" hidden />
+</form>
+
+<script type="text/javascript">
+  let newObj = {};
+  //IE8、IE9 では File API が実装されていないため size や type を取得することができません。
+  function callbackSuccess(e, data) {
+    var file = data.files[0];
+    var fileName = file.name;
+    var fileSize = file.size;
+    var fileType = file.type;
+    //受信した情報
+    var receiveFile = data.result[0];
+    var receiveFileName = receiveFile.name;
+    var receivePhysicalFileName = receiveFile.physicalName;
+    var receiveFileSize = receiveFile.size;
+    //doSomething
+    if(fileName.length > 200){
+      fileName.slice(0,200)
+    }
+    newObj.cvAttach = fileName;
+  }
+  function callbackError(e, data) {
+    var file = data.files[0];
+    var fileName = file.name;
+    var fileSize = file.size;
+    var fileType = file.type;
+    //doSomething
+  }
+  $(function () {
+    $("#search").bind('click', function () {
+      openSearchWindow();
+    });
+  });
+  /**
+   * open関数
+   */
+  function openSearchWindow() {
+    var parameter = {
+      tabs: [{
+        id: "jp.co.intra_mart.master.app.search.tabs.user.list_user",
+        title: "キーワード"
+      }],
+      prop: {
+        'jp.co.intra_mart.master.app.search.tabs.user.list_user': ['user_cd',
+          'user_name']
+      },
+      callback_function: 'setUser',
+      basic_area: 'jp.co.intra_mart.master.app.search.headers.readonly',
+      wnd_title: "ユーザ検索",
+      message: "ユーザ検索",
+      wnd_close: true,
+      type: 'multiple',
+      deleted_data: false,
+      target_locale: 'ja',
+      additional_disp: true,
+      additional_user_search_name: true,
+      additional_dept: true
+    };
+
+    // 検索画面を開く
+    imACMSearch.open(parameter);
+  }
+
+  /**
+   * callback関数
+   */
+  function setUser(object) {
+    var str = "";
+    for (var i = 0; i < object.length; i++) {
+      str += object[i].data.user_name + ",";
+    }
+    newObj.introductionPerson = str.substring(0, str.length - 1);
+    document.getElementById("txtBox_introductionPerson").setAttribute('value',
+      newObj.introductionPerson);
+  }
+  function onSave() {
+    var isValid = formValidate();
+    if (isValid == true) {
+      newObj.fullName = $('#txtBox_fullName').val();
+      newObj.phoneNumber = $('#txtBox_phoneNumber').val();
+      $('#chBox_applyPositionDeveloper').is(":checked") == true ? newObj.applyPositionDeveloper = 1
+        : newObj.applyPositionDeveloper = 0;
+      $('#chBox_applyPositionTester').is(":checked") == true ? newObj.applyPositionTester = 1
+        : newObj.applyPositionTester = 0;
+      newObj.birthDay = $('#txtBox_birthDay').val();
+      $('input[name=radio]').filter(":checked").val() ? newObj.gender = $(
+        'input[name=radio]').filter(":checked").val() : newObj.gender = "";
+      newObj.selfIntroduction = $('#txtBox_selfIntroduction').text() === '' ? null
+        : $('#txtBox_selfIntroduction').text();
+      newObj.note = $('#txtArea_note').val();
+      newObj.userName = $('#txtBox_userName').val();
+      $('#toggle_allowLogin').is(":checked") === true ? newObj.allowLogin = 1
+        : newObj.allowLogin = 0;
+      newObj.password = $('#txtBox_password').val();
+      var callActionParams = {
+        objData: newObj
+      };
+      $('#callActionParams').val(JSON.stringify(callActionParams));
+      $('#actionForm').attr("action", "register_screen/saveData");
+      console.log("new ", newObj);
+      imuiAjaxSubmit(
+        "#actionForm",
+        "POST",
+        "json",
+        function () {
+          imuiShowSuccessMessage(
+            `<imart type="string" value="登録に成功しました。" escapeJs="true" escapeXml="true" />`,
+            true, 10000, true);
+        });
+    }
+  }
+
+  function formValidate() {
+    var txtBox_selfIntroduction_val = $('#txtBox_selfIntroduction').text();
+    var validate_input = imuiValidate('#inputForm', rules, messages, undefined,
+      function (error, element) {
+        var td = $(element).parents('td: first');
+        error.insertAfter(element);
+      });
+    if (txtBox_selfIntroduction_val.length > 200) {
+      imuiShowErrorMessage(
+        `<imart type="string" value=$errMsg.Error0001 escapeJs="true" escapeXml="true" />`,
+        [], true, 3000);
+      return false;
+    } else if (validate_input == false) {
+      return false;
+      ;
+    }
+    return true
+  }
+</script>
