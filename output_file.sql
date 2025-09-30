@@ -18,16 +18,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
 --
 
 -- *not* creating schema, since initdb creates it
 
 
-ALTER SCHEMA public OWNER TO postgres;
-
 --
--- Name: create_quote_final_and_update_quote_status(bigint, character varying, bigint, character varying, date, date, character varying, character varying, character varying, numeric, bigint, character varying, character varying, character varying, boolean, character varying, text); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: create_quote_final_and_update_quote_status(bigint, character varying, bigint, character varying, date, date, character varying, character varying, character varying, numeric, bigint, character varying, character varying, character varying, boolean, character varying, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
 CREATE FUNCTION public.create_quote_final_and_update_quote_status(p_quote_id bigint, quote_final_no character varying, customer_id bigint, project_name character varying, start_date date, end_date date, quote_final_type character varying, work_location character varying, project_content character varying, total_man_month numeric, total_amount bigint, currency_code character varying, quote_final_validity character varying, condition_payment character varying, is_entrust boolean, person_in_charge character varying, attach_file text) RETURNS bigint
@@ -70,14 +68,12 @@ END;
 $$;
 
 
-ALTER FUNCTION public.create_quote_final_and_update_quote_status(p_quote_id bigint, quote_final_no character varying, customer_id bigint, project_name character varying, start_date date, end_date date, quote_final_type character varying, work_location character varying, project_content character varying, total_man_month numeric, total_amount bigint, currency_code character varying, quote_final_validity character varying, condition_payment character varying, is_entrust boolean, person_in_charge character varying, attach_file text) OWNER TO postgres;
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: m_code; Type: TABLE; Schema: public; Owner: liberty
+-- Name: m_code; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.m_code (
@@ -94,10 +90,8 @@ CREATE TABLE public.m_code (
 );
 
 
-ALTER TABLE public.m_code OWNER TO liberty;
-
 --
--- Name: m_code12; Type: VIEW; Schema: public; Owner: liberty
+-- Name: m_code12; Type: VIEW; Schema: public; Owner: -
 --
 
 CREATE VIEW public.m_code12 AS
@@ -107,10 +101,8 @@ CREATE VIEW public.m_code12 AS
    FROM public.m_code;
 
 
-ALTER VIEW public.m_code12 OWNER TO liberty;
-
 --
--- Name: t_acceptance_report; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_acceptance_report; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_acceptance_report (
@@ -130,108 +122,8 @@ CREATE TABLE public.t_acceptance_report (
 );
 
 
-ALTER TABLE public.t_acceptance_report OWNER TO liberty;
-
 --
--- Name: TABLE t_acceptance_report; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON TABLE public.t_acceptance_report IS 'Quản lý biên bản nghiệm thu';
-
-
---
--- Name: COLUMN t_acceptance_report.acceptance_report_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.acceptance_report_id IS 'ID biên bản nghiệm thu';
-
-
---
--- Name: COLUMN t_acceptance_report.contract_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.contract_id IS 'ID hợp đồng';
-
-
---
--- Name: COLUMN t_acceptance_report.contract_payment_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.contract_payment_id IS 'ID thanh toán';
-
-
---
--- Name: COLUMN t_acceptance_report.acceptance_status; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.acceptance_status IS 'Trạng thái biên bản';
-
-
---
--- Name: COLUMN t_acceptance_report.acceptance_date; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.acceptance_date IS 'Ngày thanh toán';
-
-
---
--- Name: COLUMN t_acceptance_report.actual_amount; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.actual_amount IS 'Số tiền thanh toán';
-
-
---
--- Name: COLUMN t_acceptance_report.currency_code; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.currency_code IS 'Loại tiền';
-
-
---
--- Name: COLUMN t_acceptance_report.payment_method; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.payment_method IS 'Phương thức thanh toán';
-
-
---
--- Name: COLUMN t_acceptance_report.acceptance_remark; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.acceptance_remark IS 'Ghi chú';
-
-
---
--- Name: COLUMN t_acceptance_report.create_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.create_user IS 'Người tạo';
-
-
---
--- Name: COLUMN t_acceptance_report.create_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.create_timestamp IS 'Ngày tạo';
-
-
---
--- Name: COLUMN t_acceptance_report.update_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.update_user IS 'Người sửa';
-
-
---
--- Name: COLUMN t_acceptance_report.update_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_acceptance_report.update_timestamp IS 'Ngày sửa';
-
-
---
--- Name: t_acceptance_report_acceptance_report_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_acceptance_report_acceptance_report_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_acceptance_report_acceptance_report_id_seq
@@ -242,17 +134,15 @@ CREATE SEQUENCE public.t_acceptance_report_acceptance_report_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_acceptance_report_acceptance_report_id_seq OWNER TO liberty;
-
 --
--- Name: t_acceptance_report_acceptance_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_acceptance_report_acceptance_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_acceptance_report_acceptance_report_id_seq OWNED BY public.t_acceptance_report.acceptance_report_id;
 
 
 --
--- Name: t_approval_history; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_approval_history; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_approval_history (
@@ -269,87 +159,8 @@ CREATE TABLE public.t_approval_history (
 );
 
 
-ALTER TABLE public.t_approval_history OWNER TO liberty;
-
 --
--- Name: TABLE t_approval_history; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON TABLE public.t_approval_history IS 'Quản lý lịch sử phê duyệt';
-
-
---
--- Name: COLUMN t_approval_history.app_history_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.app_history_id IS 'ID lịch sử phê duyệt';
-
-
---
--- Name: COLUMN t_approval_history.document_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.document_id IS 'ID tài liệu';
-
-
---
--- Name: COLUMN t_approval_history.document_type; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.document_type IS 'Loại tài liệu';
-
-
---
--- Name: COLUMN t_approval_history.document_version; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.document_version IS 'ID phiên bản tài liệu';
-
-
---
--- Name: COLUMN t_approval_history.app_status; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.app_status IS 'Trạng thái phê duyệt';
-
-
---
--- Name: COLUMN t_approval_history.app_content; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.app_content IS 'Nội dung phê duyệt';
-
-
---
--- Name: COLUMN t_approval_history.create_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.create_user IS 'Người tạo';
-
-
---
--- Name: COLUMN t_approval_history.create_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.create_timestamp IS 'Ngày tạo';
-
-
---
--- Name: COLUMN t_approval_history.update_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.update_user IS 'Người sửa';
-
-
---
--- Name: COLUMN t_approval_history.update_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_approval_history.update_timestamp IS 'Ngày sửa';
-
-
---
--- Name: t_approval_history_app_history_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_approval_history_app_history_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_approval_history_app_history_id_seq
@@ -360,17 +171,15 @@ CREATE SEQUENCE public.t_approval_history_app_history_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_approval_history_app_history_id_seq OWNER TO liberty;
-
 --
--- Name: t_approval_history_app_history_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_approval_history_app_history_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_approval_history_app_history_id_seq OWNED BY public.t_approval_history.app_history_id;
 
 
 --
--- Name: t_contract; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_contract; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_contract (
@@ -396,150 +205,8 @@ CREATE TABLE public.t_contract (
 );
 
 
-ALTER TABLE public.t_contract OWNER TO liberty;
-
 --
--- Name: TABLE t_contract; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON TABLE public.t_contract IS 'Quản Lý Hợp Đồng';
-
-
---
--- Name: COLUMN t_contract.contract_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.contract_id IS 'ID hợp đồng';
-
-
---
--- Name: COLUMN t_contract.quote_final_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.quote_final_id IS 'ID báo giá chính thức';
-
-
---
--- Name: COLUMN t_contract.contract_no; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.contract_no IS 'Mã hợp đồng';
-
-
---
--- Name: COLUMN t_contract.contract_type; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.contract_type IS 'Loại hợp đồng';
-
-
---
--- Name: COLUMN t_contract.contract_status; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.contract_status IS 'Trạng thái hợp đồng';
-
-
---
--- Name: COLUMN t_contract.person_in_charge; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.person_in_charge IS 'Người phụ trách chính';
-
-
---
--- Name: COLUMN t_contract.sub_person_in_charge; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.sub_person_in_charge IS 'Người phụ trách phụ';
-
-
---
--- Name: COLUMN t_contract.customer_in_charge; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.customer_in_charge IS 'Người phu trách phía khách hàng';
-
-
---
--- Name: COLUMN t_contract.contract_start_date; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.contract_start_date IS 'Ngày bắt đầu';
-
-
---
--- Name: COLUMN t_contract.contract_end_date; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.contract_end_date IS 'Ngày kết thúc';
-
-
---
--- Name: COLUMN t_contract.man_month; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.man_month IS 'Tổng công số';
-
-
---
--- Name: COLUMN t_contract.total_amount; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.total_amount IS 'Tổng tiền';
-
-
---
--- Name: COLUMN t_contract.currency_code; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.currency_code IS 'Loại tiền';
-
-
---
--- Name: COLUMN t_contract.attach_file; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.attach_file IS 'File đính kèm';
-
-
---
--- Name: COLUMN t_contract.create_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.create_user IS 'Người tạo';
-
-
---
--- Name: COLUMN t_contract.create_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.create_timestamp IS 'Ngày tạo';
-
-
---
--- Name: COLUMN t_contract.update_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.update_user IS 'Người sửa';
-
-
---
--- Name: COLUMN t_contract.update_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.update_timestamp IS 'Ngày sửa';
-
-
---
--- Name: COLUMN t_contract.customer_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract.customer_id IS 'Mã khách hàng';
-
-
---
--- Name: t_contract_contract_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_contract_contract_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_contract_contract_id_seq
@@ -550,17 +217,15 @@ CREATE SEQUENCE public.t_contract_contract_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_contract_contract_id_seq OWNER TO liberty;
-
 --
--- Name: t_contract_contract_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_contract_contract_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_contract_contract_id_seq OWNED BY public.t_contract.contract_id;
 
 
 --
--- Name: t_contract_payment; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_contract_payment; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_contract_payment (
@@ -578,94 +243,8 @@ CREATE TABLE public.t_contract_payment (
 );
 
 
-ALTER TABLE public.t_contract_payment OWNER TO liberty;
-
 --
--- Name: TABLE t_contract_payment; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON TABLE public.t_contract_payment IS 'Quản lý thanh toán hợp đồng';
-
-
---
--- Name: COLUMN t_contract_payment.contract_payment_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.contract_payment_id IS 'ID thanh toán';
-
-
---
--- Name: COLUMN t_contract_payment.contract_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.contract_id IS 'ID hợp đồng';
-
-
---
--- Name: COLUMN t_contract_payment.contract_payment_date; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.contract_payment_date IS 'Ngày thanh toán';
-
-
---
--- Name: COLUMN t_contract_payment.contract_payment_status; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.contract_payment_status IS 'Trạng thái thanh toán';
-
-
---
--- Name: COLUMN t_contract_payment.man_month; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.man_month IS 'Công số';
-
-
---
--- Name: COLUMN t_contract_payment.total_amount; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.total_amount IS 'Tổng tiền';
-
-
---
--- Name: COLUMN t_contract_payment.currency_code; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.currency_code IS 'Loại tiền';
-
-
---
--- Name: COLUMN t_contract_payment.create_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.create_user IS 'Người tạo';
-
-
---
--- Name: COLUMN t_contract_payment.create_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.create_timestamp IS 'Ngày tạo';
-
-
---
--- Name: COLUMN t_contract_payment.update_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.update_user IS 'Người sửa';
-
-
---
--- Name: COLUMN t_contract_payment.update_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_contract_payment.update_timestamp IS 'Ngày sửa';
-
-
---
--- Name: t_contract_payment_contract_payment_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_contract_payment_contract_payment_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_contract_payment_contract_payment_id_seq
@@ -676,17 +255,15 @@ CREATE SEQUENCE public.t_contract_payment_contract_payment_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_contract_payment_contract_payment_id_seq OWNER TO liberty;
-
 --
--- Name: t_contract_payment_contract_payment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_contract_payment_contract_payment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_contract_payment_contract_payment_id_seq OWNED BY public.t_contract_payment.contract_payment_id;
 
 
 --
--- Name: t_customer; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_customer; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_customer (
@@ -702,80 +279,8 @@ CREATE TABLE public.t_customer (
 );
 
 
-ALTER TABLE public.t_customer OWNER TO liberty;
-
 --
--- Name: TABLE t_customer; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON TABLE public.t_customer IS 'Quản lý khách hàng';
-
-
---
--- Name: COLUMN t_customer.customer_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_customer.customer_id IS 'ID khách hàng';
-
-
---
--- Name: COLUMN t_customer.customer_no; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_customer.customer_no IS 'Mã khách hàng';
-
-
---
--- Name: COLUMN t_customer.customer_name; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_customer.customer_name IS 'Tên khách hàng';
-
-
---
--- Name: COLUMN t_customer.customer_phone; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_customer.customer_phone IS 'Số điện thoại';
-
-
---
--- Name: COLUMN t_customer.customer_address; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_customer.customer_address IS 'Email';
-
-
---
--- Name: COLUMN t_customer.create_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_customer.create_user IS 'Người tạo';
-
-
---
--- Name: COLUMN t_customer.create_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_customer.create_timestamp IS 'Ngày tạo';
-
-
---
--- Name: COLUMN t_customer.update_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_customer.update_user IS 'Người sửa';
-
-
---
--- Name: COLUMN t_customer.update_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_customer.update_timestamp IS 'Ngày sửa';
-
-
---
--- Name: t_customer_customer_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_customer_customer_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_customer_customer_id_seq
@@ -786,17 +291,15 @@ CREATE SEQUENCE public.t_customer_customer_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_customer_customer_id_seq OWNER TO liberty;
-
 --
--- Name: t_customer_customer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_customer_customer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_customer_customer_id_seq OWNED BY public.t_customer.customer_id;
 
 
 --
--- Name: t_quote; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_quote; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_quote (
@@ -825,164 +328,8 @@ CREATE TABLE public.t_quote (
 );
 
 
-ALTER TABLE public.t_quote OWNER TO liberty;
-
 --
--- Name: TABLE t_quote; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON TABLE public.t_quote IS 'Quản lý báo giá';
-
-
---
--- Name: COLUMN t_quote.quote_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.quote_id IS 'ID báo giá';
-
-
---
--- Name: COLUMN t_quote.quote_type; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.quote_type IS 'Loại báo giá';
-
-
---
--- Name: COLUMN t_quote.quote_no; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.quote_no IS 'Mã báo giá';
-
-
---
--- Name: COLUMN t_quote.customer_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.customer_id IS 'ID khách hàng';
-
-
---
--- Name: COLUMN t_quote.project_no; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.project_no IS 'Mã dự án';
-
-
---
--- Name: COLUMN t_quote.quote_status; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.quote_status IS 'Trạng thái báo giá';
-
-
---
--- Name: COLUMN t_quote.project_name; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.project_name IS 'Tên dự án';
-
-
---
--- Name: COLUMN t_quote.project_content; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.project_content IS 'Nội dung công việc';
-
-
---
--- Name: COLUMN t_quote.start_date; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.start_date IS 'Ngày bắt đầu';
-
-
---
--- Name: COLUMN t_quote.end_date; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.end_date IS 'Ngày kết thúc';
-
-
---
--- Name: COLUMN t_quote.work_location; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.work_location IS 'Địa điểm làm việc';
-
-
---
--- Name: COLUMN t_quote.total_man_month; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.total_man_month IS 'Tổng công cố';
-
-
---
--- Name: COLUMN t_quote.total_amount; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.total_amount IS 'Tổng tiền';
-
-
---
--- Name: COLUMN t_quote.currency_code; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.currency_code IS 'Loại tiền';
-
-
---
--- Name: COLUMN t_quote.priority; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.priority IS 'Độ ưu tiên';
-
-
---
--- Name: COLUMN t_quote.remark; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.remark IS 'Ghi chú';
-
-
---
--- Name: COLUMN t_quote.create_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.create_user IS 'Người tạo';
-
-
---
--- Name: COLUMN t_quote.create_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.create_timestamp IS 'Ngày tạo';
-
-
---
--- Name: COLUMN t_quote.update_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.update_user IS 'Người sửa';
-
-
---
--- Name: COLUMN t_quote.update_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.update_timestamp IS 'Ngày sửa';
-
-
---
--- Name: COLUMN t_quote.create_user_name; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote.create_user_name IS 'Tên người tạo';
-
-
---
--- Name: t_quote_file; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_quote_file; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_quote_file (
@@ -993,10 +340,8 @@ CREATE TABLE public.t_quote_file (
 );
 
 
-ALTER TABLE public.t_quote_file OWNER TO liberty;
-
 --
--- Name: t_quote_file_quote_file_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_quote_file_quote_file_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_quote_file_quote_file_id_seq
@@ -1008,17 +353,15 @@ CREATE SEQUENCE public.t_quote_file_quote_file_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_quote_file_quote_file_id_seq OWNER TO liberty;
-
 --
--- Name: t_quote_file_quote_file_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_quote_file_quote_file_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_quote_file_quote_file_id_seq OWNED BY public.t_quote_file.quote_file_id;
 
 
 --
--- Name: t_quote_final; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_quote_final; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_quote_final (
@@ -1047,171 +390,8 @@ CREATE TABLE public.t_quote_final (
 );
 
 
-ALTER TABLE public.t_quote_final OWNER TO liberty;
-
 --
--- Name: TABLE t_quote_final; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON TABLE public.t_quote_final IS 'Quản lý báo giá chính thức';
-
-
---
--- Name: COLUMN t_quote_final.quote_final_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.quote_final_id IS 'ID báo giá chính thức';
-
-
---
--- Name: COLUMN t_quote_final.quote_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.quote_id IS 'ID báo giá';
-
-
---
--- Name: COLUMN t_quote_final.quote_final_no; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.quote_final_no IS 'Mã báo giá chính thức';
-
-
---
--- Name: COLUMN t_quote_final.quote_final_type; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.quote_final_type IS 'Loại báo giá';
-
-
---
--- Name: COLUMN t_quote_final.customer_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.customer_id IS 'ID khách hàng';
-
-
---
--- Name: COLUMN t_quote_final.project_name; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.project_name IS 'Tên dự án';
-
-
---
--- Name: COLUMN t_quote_final.start_date; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.start_date IS 'Ngày bắt đầu';
-
-
---
--- Name: COLUMN t_quote_final.end_date; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.end_date IS 'Ngày kết thúc';
-
-
---
--- Name: COLUMN t_quote_final.work_location; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.work_location IS 'Địa điểm làm việc';
-
-
---
--- Name: COLUMN t_quote_final.project_content; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.project_content IS 'Nội dung công việc';
-
-
---
--- Name: COLUMN t_quote_final.total_man_month; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.total_man_month IS 'Tổng công cố';
-
-
---
--- Name: COLUMN t_quote_final.total_amount; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.total_amount IS 'Tổng tiền';
-
-
---
--- Name: COLUMN t_quote_final.currency_code; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.currency_code IS 'Loại tiền';
-
-
---
--- Name: COLUMN t_quote_final.attach_file; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.attach_file IS 'Tài liệu đính kèm';
-
-
---
--- Name: COLUMN t_quote_final.quote_final_validity; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.quote_final_validity IS 'Thời hạn hiệu lực của báo giá';
-
-
---
--- Name: COLUMN t_quote_final.condition_payment; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.condition_payment IS 'Điều kiện thanh toán';
-
-
---
--- Name: COLUMN t_quote_final.is_entrust; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.is_entrust IS 'Ủy thác cho bên thứ ba';
-
-
---
--- Name: COLUMN t_quote_final.person_in_charge; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.person_in_charge IS 'Người phụ trách';
-
-
---
--- Name: COLUMN t_quote_final.create_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.create_user IS 'Người tạo';
-
-
---
--- Name: COLUMN t_quote_final.create_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.create_timestamp IS 'Ngày tạo';
-
-
---
--- Name: COLUMN t_quote_final.update_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.update_user IS 'Người sửa';
-
-
---
--- Name: COLUMN t_quote_final.update_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_final.update_timestamp IS 'Ngày sửa';
-
-
---
--- Name: t_quote_final_quote_final_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_quote_final_quote_final_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_quote_final_quote_final_id_seq
@@ -1222,17 +402,15 @@ CREATE SEQUENCE public.t_quote_final_quote_final_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_quote_final_quote_final_id_seq OWNER TO liberty;
-
 --
--- Name: t_quote_final_quote_final_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_quote_final_quote_final_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_quote_final_quote_final_id_seq OWNED BY public.t_quote_final.quote_final_id;
 
 
 --
--- Name: t_quote_payment; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_quote_payment; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_quote_payment (
@@ -1250,94 +428,8 @@ CREATE TABLE public.t_quote_payment (
 );
 
 
-ALTER TABLE public.t_quote_payment OWNER TO liberty;
-
 --
--- Name: TABLE t_quote_payment; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON TABLE public.t_quote_payment IS 'Quản lý dự kiến thanh toán';
-
-
---
--- Name: COLUMN t_quote_payment.quote_payment_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.quote_payment_id IS 'ID thanh toán';
-
-
---
--- Name: COLUMN t_quote_payment.quote_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.quote_id IS 'ID hợp đồng';
-
-
---
--- Name: COLUMN t_quote_payment.quote_payment_date; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.quote_payment_date IS 'Ngày thanh toán';
-
-
---
--- Name: COLUMN t_quote_payment.man_month; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.man_month IS 'Công số';
-
-
---
--- Name: COLUMN t_quote_payment.total_amount; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.total_amount IS 'Tổng tiền';
-
-
---
--- Name: COLUMN t_quote_payment.currency_code; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.currency_code IS 'Loại tiền';
-
-
---
--- Name: COLUMN t_quote_payment.create_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.create_user IS 'Người tạo';
-
-
---
--- Name: COLUMN t_quote_payment.create_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.create_timestamp IS 'Ngày tạo';
-
-
---
--- Name: COLUMN t_quote_payment.update_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.update_user IS 'Người sửa';
-
-
---
--- Name: COLUMN t_quote_payment.update_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.update_timestamp IS 'Ngày sửa';
-
-
---
--- Name: COLUMN t_quote_payment.quote_payment_type; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_payment.quote_payment_type IS '0: raw, 1: final';
-
-
---
--- Name: t_quote_payment_quote_payment_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_quote_payment_quote_payment_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_quote_payment_quote_payment_id_seq
@@ -1348,17 +440,15 @@ CREATE SEQUENCE public.t_quote_payment_quote_payment_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_quote_payment_quote_payment_id_seq OWNER TO liberty;
-
 --
--- Name: t_quote_payment_quote_payment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_quote_payment_quote_payment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_quote_payment_quote_payment_id_seq OWNED BY public.t_quote_payment.quote_payment_id;
 
 
 --
--- Name: t_quote_quote_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_quote_quote_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_quote_quote_id_seq
@@ -1369,17 +459,15 @@ CREATE SEQUENCE public.t_quote_quote_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_quote_quote_id_seq OWNER TO liberty;
-
 --
--- Name: t_quote_quote_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_quote_quote_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_quote_quote_id_seq OWNED BY public.t_quote.quote_id;
 
 
 --
--- Name: t_quote_version; Type: TABLE; Schema: public; Owner: liberty
+-- Name: t_quote_version; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.t_quote_version (
@@ -1394,73 +482,8 @@ CREATE TABLE public.t_quote_version (
 );
 
 
-ALTER TABLE public.t_quote_version OWNER TO liberty;
-
 --
--- Name: TABLE t_quote_version; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON TABLE public.t_quote_version IS 'Quản lý phiên bản báo giá';
-
-
---
--- Name: COLUMN t_quote_version.quote_version_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_version.quote_version_id IS 'ID phiên bản';
-
-
---
--- Name: COLUMN t_quote_version.quote_id; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_version.quote_id IS 'ID báo giá';
-
-
---
--- Name: COLUMN t_quote_version.version; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_version.version IS 'Phiên bản';
-
-
---
--- Name: COLUMN t_quote_version.memo; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_version.memo IS 'Ghi chú';
-
-
---
--- Name: COLUMN t_quote_version.create_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_version.create_user IS 'Người tạo';
-
-
---
--- Name: COLUMN t_quote_version.create_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_version.create_timestamp IS 'Ngày tạo';
-
-
---
--- Name: COLUMN t_quote_version.update_user; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_version.update_user IS 'Người sửa';
-
-
---
--- Name: COLUMN t_quote_version.update_timestamp; Type: COMMENT; Schema: public; Owner: liberty
---
-
-COMMENT ON COLUMN public.t_quote_version.update_timestamp IS 'Ngày sửa';
-
-
---
--- Name: t_quote_version_quote_version_id_seq; Type: SEQUENCE; Schema: public; Owner: liberty
+-- Name: t_quote_version_quote_version_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.t_quote_version_quote_version_id_seq
@@ -1471,87 +494,85 @@ CREATE SEQUENCE public.t_quote_version_quote_version_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.t_quote_version_quote_version_id_seq OWNER TO liberty;
-
 --
--- Name: t_quote_version_quote_version_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: liberty
+-- Name: t_quote_version_quote_version_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.t_quote_version_quote_version_id_seq OWNED BY public.t_quote_version.quote_version_id;
 
 
 --
--- Name: t_acceptance_report acceptance_report_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_acceptance_report acceptance_report_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_acceptance_report ALTER COLUMN acceptance_report_id SET DEFAULT nextval('public.t_acceptance_report_acceptance_report_id_seq'::regclass);
 
 
 --
--- Name: t_approval_history app_history_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_approval_history app_history_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_approval_history ALTER COLUMN app_history_id SET DEFAULT nextval('public.t_approval_history_app_history_id_seq'::regclass);
 
 
 --
--- Name: t_contract contract_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_contract contract_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_contract ALTER COLUMN contract_id SET DEFAULT nextval('public.t_contract_contract_id_seq'::regclass);
 
 
 --
--- Name: t_contract_payment contract_payment_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_contract_payment contract_payment_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_contract_payment ALTER COLUMN contract_payment_id SET DEFAULT nextval('public.t_contract_payment_contract_payment_id_seq'::regclass);
 
 
 --
--- Name: t_customer customer_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_customer customer_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_customer ALTER COLUMN customer_id SET DEFAULT nextval('public.t_customer_customer_id_seq'::regclass);
 
 
 --
--- Name: t_quote quote_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_quote quote_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote ALTER COLUMN quote_id SET DEFAULT nextval('public.t_quote_quote_id_seq'::regclass);
 
 
 --
--- Name: t_quote_file quote_file_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_quote_file quote_file_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote_file ALTER COLUMN quote_file_id SET DEFAULT nextval('public.t_quote_file_quote_file_id_seq'::regclass);
 
 
 --
--- Name: t_quote_final quote_final_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_quote_final quote_final_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote_final ALTER COLUMN quote_final_id SET DEFAULT nextval('public.t_quote_final_quote_final_id_seq'::regclass);
 
 
 --
--- Name: t_quote_payment quote_payment_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_quote_payment quote_payment_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote_payment ALTER COLUMN quote_payment_id SET DEFAULT nextval('public.t_quote_payment_quote_payment_id_seq'::regclass);
 
 
 --
--- Name: t_quote_version quote_version_id; Type: DEFAULT; Schema: public; Owner: liberty
+-- Name: t_quote_version quote_version_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote_version ALTER COLUMN quote_version_id SET DEFAULT nextval('public.t_quote_version_quote_version_id_seq'::regclass);
 
 
 --
--- Data for Name: m_code; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: m_code; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.m_code VALUES ('D0001', 'Loại hợp đồng', 'CONTT001', 'NDA', 1, '0', NULL, NULL, NULL, NULL);
@@ -1582,7 +603,7 @@ INSERT INTO public.m_code VALUES ('D0003', 'Loại báo giá', 'QUOTT002', 'Bên
 
 
 --
--- Data for Name: t_acceptance_report; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_acceptance_report; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.t_acceptance_report VALUES (26, 101, 678, 'ARS001', '2025-09-19', 444, 'CURR002', 'Tiền mặt', NULL, NULL, NULL, NULL, NULL);
@@ -1592,13 +613,13 @@ INSERT INTO public.t_acceptance_report VALUES (29, 129, 685, 'ARS002', '2025-09-
 
 
 --
--- Data for Name: t_approval_history; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_approval_history; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 
 
 --
--- Data for Name: t_contract; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_contract; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.t_contract VALUES (127, 16, '2025_3_127', 'CONTT002', 'CONTS001', 'test', 'test', 'test', '2025-09-02', '2025-09-10', 12.00, 1222222, 'CURR002', 'e2c1z7zmhMwK28hZ4fAZKM4cp0lt2sGzXPXxsQ3hkZsf8VTCAdKRM1Q0TKdxXoIFbBBJ0bMZCqQYYnUqXi4DQQp9UQQHVJtWNvUmG3IdZdhm2YKdX8hqzz31m1uadn7a', 0, NULL, NULL, NULL, 3);
@@ -1606,7 +627,7 @@ INSERT INTO public.t_contract VALUES (129, 17, '2025_2_129', 'CONTT002', 'CONTS0
 
 
 --
--- Data for Name: t_contract_payment; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_contract_payment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.t_contract_payment VALUES (683, 128, '2026-09-19', 'CPS001', 10.00, 2000, NULL, NULL, NULL, NULL, NULL);
@@ -1623,7 +644,7 @@ INSERT INTO public.t_contract_payment VALUES (685, 129, '2026-09-19', 'CPS001', 
 
 
 --
--- Data for Name: t_customer; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_customer; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.t_customer VALUES (1, '01234', 'nhat', '0943754', 'hanam', 1, NULL, 1, NULL);
@@ -1632,7 +653,7 @@ INSERT INTO public.t_customer VALUES (3, '456', 'nguyen', '01212121', 'phutho', 
 
 
 --
--- Data for Name: t_quote; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_quote; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.t_quote VALUES (149, 'QUOTT001', 'Draft_20250923142915', 3, NULL, 'RAWTYPE004', 'demo111', NULL, '2025-09-23', '2025-09-26', '', 0.00, 0, '', '', '', NULL, NULL, NULL, NULL, '', '8hr5o90laq1i97a');
@@ -1657,7 +678,7 @@ INSERT INTO public.t_quote VALUES (159, 'QUOTT002', 'Draft_20250924134044', 2, N
 
 
 --
--- Data for Name: t_quote_file; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_quote_file; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.t_quote_file VALUES (98, NULL, 59, 'c5QMbJulWrS4C9dnlfJqdI9sLJN1ecoe0aLHr89fN4wmA3wsQAk1C9EPLRNYCPO7gCYznj9OfRVcxzoHPzg4FQnWiZecmDo5S8YisRlhcKIRZA9kN8hqzyhu7au88u7a');
@@ -1782,7 +803,7 @@ INSERT INTO public.t_quote_file VALUES (186, NULL, 103, '');
 
 
 --
--- Data for Name: t_quote_final; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_quote_final; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.t_quote_final VALUES (16, 140, '2025_456_OFFICIAL_1', 'QUOTT001', 3, 'test11', '2025-09-01', '2025-09-19', 'dtsvn', NULL, 100.00, 200000, 'CURR002', NULL, '', '', false, '', NULL, NULL, NULL, NULL);
@@ -1790,7 +811,7 @@ INSERT INTO public.t_quote_final VALUES (17, 144, '2025_1212421_OFFICIAL_2', 'QU
 
 
 --
--- Data for Name: t_quote_payment; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_quote_payment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.t_quote_payment VALUES (113, 140, '2025-09-19', 10.00, 2000, NULL, NULL, NULL, NULL, NULL, '0');
@@ -1849,7 +870,7 @@ INSERT INTO public.t_quote_payment VALUES (193, 2, NULL, NULL, NULL, NULL, NULL,
 
 
 --
--- Data for Name: t_quote_version; Type: TABLE DATA; Schema: public; Owner: liberty
+-- Data for Name: t_quote_version; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.t_quote_version VALUES (1, 57, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -1958,77 +979,77 @@ INSERT INTO public.t_quote_version VALUES (103, 159, 2, 'Từ chối duyệt', '
 
 
 --
--- Name: t_acceptance_report_acceptance_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_acceptance_report_acceptance_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_acceptance_report_acceptance_report_id_seq', 29, true);
 
 
 --
--- Name: t_approval_history_app_history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_approval_history_app_history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_approval_history_app_history_id_seq', 1, false);
 
 
 --
--- Name: t_contract_contract_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_contract_contract_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_contract_contract_id_seq', 129, true);
 
 
 --
--- Name: t_contract_payment_contract_payment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_contract_payment_contract_payment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_contract_payment_contract_payment_id_seq', 705, true);
 
 
 --
--- Name: t_customer_customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_customer_customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_customer_customer_id_seq', 2, true);
 
 
 --
--- Name: t_quote_file_quote_file_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_quote_file_quote_file_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_quote_file_quote_file_id_seq', 186, true);
 
 
 --
--- Name: t_quote_final_quote_final_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_quote_final_quote_final_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_quote_final_quote_final_id_seq', 17, true);
 
 
 --
--- Name: t_quote_payment_quote_payment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_quote_payment_quote_payment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_quote_payment_quote_payment_id_seq', 193, true);
 
 
 --
--- Name: t_quote_quote_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_quote_quote_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_quote_quote_id_seq', 160, true);
 
 
 --
--- Name: t_quote_version_quote_version_id_seq; Type: SEQUENCE SET; Schema: public; Owner: liberty
+-- Name: t_quote_version_quote_version_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.t_quote_version_quote_version_id_seq', 103, true);
 
 
 --
--- Name: m_code m_code_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: m_code m_code_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.m_code
@@ -2036,7 +1057,7 @@ ALTER TABLE ONLY public.m_code
 
 
 --
--- Name: t_acceptance_report t_acceptance_report_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_acceptance_report t_acceptance_report_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_acceptance_report
@@ -2044,7 +1065,7 @@ ALTER TABLE ONLY public.t_acceptance_report
 
 
 --
--- Name: t_approval_history t_approval_history_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_approval_history t_approval_history_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_approval_history
@@ -2052,7 +1073,7 @@ ALTER TABLE ONLY public.t_approval_history
 
 
 --
--- Name: t_contract_payment t_contract_payment_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_contract_payment t_contract_payment_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_contract_payment
@@ -2060,7 +1081,7 @@ ALTER TABLE ONLY public.t_contract_payment
 
 
 --
--- Name: t_contract t_contract_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_contract t_contract_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_contract
@@ -2068,7 +1089,7 @@ ALTER TABLE ONLY public.t_contract
 
 
 --
--- Name: t_customer t_customer_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_customer t_customer_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_customer
@@ -2076,7 +1097,7 @@ ALTER TABLE ONLY public.t_customer
 
 
 --
--- Name: t_quote_file t_quote_file_pkey; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_quote_file t_quote_file_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote_file
@@ -2084,7 +1105,7 @@ ALTER TABLE ONLY public.t_quote_file
 
 
 --
--- Name: t_quote_final t_quote_final_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_quote_final t_quote_final_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote_final
@@ -2092,7 +1113,7 @@ ALTER TABLE ONLY public.t_quote_final
 
 
 --
--- Name: t_quote_payment t_quote_payment_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_quote_payment t_quote_payment_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote_payment
@@ -2100,7 +1121,7 @@ ALTER TABLE ONLY public.t_quote_payment
 
 
 --
--- Name: t_quote t_quote_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_quote t_quote_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote
@@ -2108,19 +1129,11 @@ ALTER TABLE ONLY public.t_quote
 
 
 --
--- Name: t_quote_version t_quote_version_pkc; Type: CONSTRAINT; Schema: public; Owner: liberty
+-- Name: t_quote_version t_quote_version_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.t_quote_version
     ADD CONSTRAINT t_quote_version_pkc PRIMARY KEY (quote_version_id);
-
-
---
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE USAGE ON SCHEMA public FROM PUBLIC;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
